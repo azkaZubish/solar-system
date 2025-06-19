@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+     <style>
+html, body {
+   margin: 0;
+   height: 100%;
+}
+#solarSystem {
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+#controlPanel {
+  position: absolute;
+  top: 2%;
+  right: 1.5%;
+  background: rgba(20, 20, 20, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  color: hsl(252, 6%, 83%);
+  font-family :Verdana, Geneva, Tahoma, sans-serif;
+  max-width: 200px;
+  z-index: 10;
+}
+#controlPanel label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  margin: 5px 0;
+}
+#controlPanel input[type="range"] {
+  width: 100px;
+}
+#toggleAnimation {
+  position: absolute;
+  top: 2%;
+  left: 1.5%;
+  background: rgba(20, 20, 20, 0.8);
+  color: hsl(252, 6%, 83%);
+  padding: 10px;
+  border-radius: 8px;
+  font-family :Verdana, Geneva, Tahoma, sans-serif;
+}
+</style>
+    <script type="module" crossorigin src="/solar-system/assets/index-ClUz4Nn2.js"></script>
+  </head>
+  <body>
+    <div id="controlPanel">
+     <h2>Planet Speeds</h2>
+       <label>Mercury <input type="range" id="mercurySlider" min="0.1" max="5" step="0.1" value="0.5"></label>
+       <label>Venus <input type="range" id="venusSlider" min="0.1" max="5" step="0.1" value="1"></label>
+       <label>Earth <input type="range" id="earthSlider" min="0.1" max="5" step="0.1" value="1.5"></label>
+       <label>Mars <input type="range" id="marsSlider" min="0.1" max="5" step="0.1" value="2"></label>
+       <label>Jupiter <input type="range" id="jupiterSlider" min="0.1" max="5" step="0.1" value="2.5"></label>
+       <label>Saturn <input type="range" id="saturnSlider" min="0.1" max="5" step="0.1" value="3"></label>
+       <label>Uranus <input type="range" id="uranusSlider" min="0.1" max="5" step="0.1" value="3.44"></label>
+       <label>Neptune <input type="range" id="neptuneSlider" min="0.1" max="5" step="0.1" value="4.29"></label>    
+   </div>
+   <div>
+    <button id="toggleAnimation">Pause</button>
+   </div>
+    <canvas id="solarSystem"></canvas>
+  </body>
+</html>
