@@ -143,6 +143,49 @@ function main() {
     speeds.neptune = parseFloat(e.target.value);
   }); 
 
+  
+    //Generating and Adding Stars to the scene
+    function generateStars(count = 1500) {
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+  
+    for (let i = 0; i < count; i++) {
+      const x = THREE.MathUtils.randFloatSpread(3000);
+      const y = THREE.MathUtils.randFloatSpread(3000);
+      const z = THREE.MathUtils.randFloatSpread(3000);
+      positions.push(x, y, z);
+    }
+  
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ color: 0xffffff, size: 1, sizeAttenuation: true });
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+    }
+  
+    generateStars();
+  
+
+ //Implementing pause/resume animation 
+  let isPaused = false;
+  const toggleBtn = document.getElementById('toggleAnimation');
+  toggleBtn.addEventListener('click', () => {
+     isPaused = !isPaused;
+     toggleBtn.textContent = isPaused ? 'Resume' : 'Pause';
+  });
+
+  //Adding ring to Saturn
+    const saturn = planets[5];
+    const ringGeometry = new THREE.RingGeometry(8, 12, 64);
+    const ringMaterial = new THREE.MeshBasicMaterial({ 
+    map : textureLoader.load('/images/saturnringcolor.jpg'),
+    side: THREE.DoubleSide,
+    transparent: true
+    });
+    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+  
+    ring.rotation.x = Math.PI / 2;
+    saturn.add(ring);
+    ring.position.copy(saturn.position);
 
   //implementing 'resize' event for responsiveness 
   window.addEventListener('resize', () => {
@@ -156,6 +199,7 @@ function main() {
   function render(time) {
     requestAnimationFrame(render);
 
+    if(isPaused) return;
 
     time *= 0.001; // Convert to seconds
     planets.forEach((planet, ndx) => {
